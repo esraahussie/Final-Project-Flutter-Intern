@@ -27,16 +27,25 @@ class _TransitionState extends State<Transition> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:AppPallet.whiteColor,
+        backgroundColor: AppPallet.whiteColor,
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.menu,color: AppPallet.mainColor,size: 30,),
+          icon: Icon(
+            Icons.menu,
+            color: AppPallet.mainColor,
+            size: 30,
+          ),
         ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications,color: AppPallet.mainColor,size: 30,),
-          ),        ],
+            icon: Icon(
+              Icons.notifications,
+              color: AppPallet.mainColor,
+              size: 30,
+            ),
+          ),
+        ],
         elevation: 0,
       ),
       body: _pages[selectedIndex],
@@ -45,7 +54,6 @@ class _TransitionState extends State<Transition> {
           topLeft: Radius.circular(25.0),
           topRight: Radius.circular(25.0),
         ),
-
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: selectedIndex,
@@ -60,15 +68,27 @@ class _TransitionState extends State<Transition> {
           elevation: 0,
           items: [
             BottomNavigationBarItem(
-              icon: IconNavBar(selectedIndex: selectedIndex,image:"assets/icons/home.png" ,index: 0,),
+              icon: IconNavBar(
+                selectedIndex: selectedIndex,
+                image: "assets/icons/home.png",
+                index: 0,
+              ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: IconNavBar(selectedIndex: selectedIndex,image:"assets/icons/favorite.png" ,index: 1,),
+              icon: IconNavBar(
+                selectedIndex: selectedIndex,
+                image: "assets/icons/favorite.png",
+                index: 1,
+              ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: IconNavBar(selectedIndex: selectedIndex,image:"assets/icons/profile.png",index: 2,),
+              icon: IconNavBar(
+                selectedIndex: selectedIndex,
+                image: "assets/icons/profile.png",
+                index: 2,
+              ),
               label: '',
             ),
           ],
