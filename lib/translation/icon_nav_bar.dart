@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app_withai/core/app_pallet.dart';
 
+// ignore: must_be_immutable
 class IconNavBar extends StatelessWidget {
   int selectedIndex;
   String image;

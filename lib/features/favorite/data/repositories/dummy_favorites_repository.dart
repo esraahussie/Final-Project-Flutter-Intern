@@ -4,25 +4,25 @@ import 'package:recipe_app_withai/features/favorite/domain/repository/favorites_
 class DummyFavoritesRepository implements FavoritesRepository {
   final List<RecipeEntity> _favorites = [
     RecipeEntity(
-      id: 'r1',
+      id: '1',
       name: 'Spaghetti Bolognese',
-      image: 'https://example.com/spaghetti.jpg',
+      image: 'https://picsum.photos/200',
       numberOfIngredients: 6,
       cookingTime: '30 mins',
       category: 'Italian',
     ),
     RecipeEntity(
-      id: 'r2',
+      id: '2',
       name: 'Chicken Curry',
-      image: 'https://example.com/curry.jpg',
+      image: 'https://picsum.photos/200',
       numberOfIngredients: 8,
       cookingTime: '45 mins',
       category: 'Indian',
     ),
     RecipeEntity(
-      id: 'r3',
+      id: '3',
       name: 'Beef Burger',
-      image: 'https://example.com/burger.jpg',
+      image: 'https://picsum.photos/200',
       numberOfIngredients: 5,
       cookingTime: '25 mins',
       category: 'American',
@@ -36,6 +36,6 @@ class DummyFavoritesRepository implements FavoritesRepository {
 
   @override
   Future<void> removeFavoriteById(String recipeId) async {
-    _favorites.removeWhere((RecipeEntity) => RecipeEntity.id == recipeId);
+    _favorites.removeWhere((recipe) => recipe.id == recipeId);
   }
 }

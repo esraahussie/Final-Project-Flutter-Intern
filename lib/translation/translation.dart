@@ -19,7 +19,7 @@ class _TransitionState extends State<Transition> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const FavoritePage(),
+    FavoritePage(),
     const ProfilePage(),
   ];
 

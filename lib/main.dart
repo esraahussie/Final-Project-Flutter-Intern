@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         Transition.routeName: (_) => const Transition(),
         HomePage.routeName: (_) => const HomePage(),
         ProfilePage.routeName: (_) => const ProfilePage(),
-        FavoritePage.routeName: (_) => const FavoritePage(),
+        FavoritePage.routeName: (_) => FavoritePage(),
       },
     );
   }
