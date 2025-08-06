@@ -2,5 +2,5 @@ import 'package:recipe_app_withai/features/favorite/domain/entity/recipe_entity.
 
 abstract class FavoritesRepository {
   Future<List<RecipeEntity>> getFavorites();
-  Future<void> removeFavoriteById(RecipeEntity recipeId);
+  Future<void> removeFavoriteById(String recipe);
 }
