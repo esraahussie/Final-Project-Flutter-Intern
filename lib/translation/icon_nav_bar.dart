@@ -1,13 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app_withai/core/app_pallet.dart';
 
+// ignore: must_be_immutable
 class IconNavBar extends StatelessWidget {
   int selectedIndex;
   String image;
   int index;
 
-  IconNavBar({super.key,required this.selectedIndex,required this.image,required this.index});
+  IconNavBar(
+      {super.key,
+      required this.selectedIndex,
+      required this.image,
+      required this.index});
+
   final double _scaleNormal = 1.0;
   final double _scaleSelected = 1.2;
 
@@ -22,16 +27,16 @@ class IconNavBar extends StatelessWidget {
     return Transform.scale(
       scale: selectedIndex == index ? _scaleSelected : _scaleNormal,
       child: Container(
-        padding: EdgeInsets.all(selectedIndex == index ? _paddingSizeSelected : _paddingSizeNormal),
+        padding: EdgeInsets.all(
+            selectedIndex == index ? _paddingSizeSelected : _paddingSizeNormal),
         decoration: selectedIndex == index
             ? const BoxDecoration(
-          color: AppPallet.mainColor,
-          shape: BoxShape.circle,
-        )
+                color: AppPallet.mainColor,
+                shape: BoxShape.circle,
+              )
             : null,
         child: ImageIcon(
             size: selectedIndex == 4 ? _iconSizeSelected : _iconSizeNormal,
-
             color: selectedIndex == index ? Colors.white : Colors.grey[700],
             AssetImage(image)),
       ),
