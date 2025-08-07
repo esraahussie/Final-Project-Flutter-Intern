@@ -1,10 +1,9 @@
 import 'package:recipe_app_withai/core/entity/recipe_entity.dart';
-import 'package:recipe_app_withai/features/favorite/domain/repository/favorites_repository.dart';
 import 'package:recipe_app_withai/features/recipe_details/domain/entities/ingredient_entity.dart';
 import 'package:recipe_app_withai/features/recipe_details/domain/entities/nutrition_entity.dart';
 
-class DummyFavoritesRepository implements FavoritesRepository {
-  final List<RecipeEntity> _favorites = [
+class DummyRecipeDataSource {
+  final List<RecipeEntity> favorites = [
     RecipeEntity(
       id: '1',
       name: 'Spaghetti Bolognese',
@@ -32,7 +31,7 @@ class DummyFavoritesRepository implements FavoritesRepository {
         NutritionEntity(name: 'Carbohydrates', quantity: '50', unit: 'g'),
         NutritionEntity(name: 'Fat', quantity: '10', unit: 'g'),
       ],
-    ),
+    )..servings = 4,
     RecipeEntity(
       id: '2',
       name: 'Chicken Curry',
@@ -47,7 +46,20 @@ class DummyFavoritesRepository implements FavoritesRepository {
         'Add spices',
         'Simmer and serve',
       ],
-    ),
+      ingredients: [
+        IngredientEntity(name: 'Chicken', quantity: '500g', unit: 'grams'),
+        IngredientEntity(
+            name: 'Curry powder', quantity: '2 tbsp', unit: 'tbsp'),
+        IngredientEntity(name: 'Tomato', quantity: '2', unit: 'piece'),
+        IngredientEntity(name: 'Onion', quantity: '1', unit: 'piece'),
+      ],
+      nutrition: [
+        NutritionEntity(name: 'Calories', quantity: '500', unit: 'kcal'),
+        NutritionEntity(name: 'Protein', quantity: '30', unit: 'g'),
+        NutritionEntity(name: 'Carbohydrates', quantity: '40', unit: 'g'),
+        NutritionEntity(name: 'Fat', quantity: '15', unit: 'g'),
+      ],
+    )..servings = 6,
     RecipeEntity(
       id: '3',
       name: 'Beef Burger',
@@ -62,16 +74,18 @@ class DummyFavoritesRepository implements FavoritesRepository {
         'Assemble burger',
         'Serve with fries',
       ],
-    ),
+      ingredients: [
+        IngredientEntity(name: 'Beef patty', quantity: '200g', unit: 'grams'),
+        IngredientEntity(name: 'Burger bun', quantity: '2', unit: 'piece'),
+        IngredientEntity(name: 'Lettuce', quantity: '1', unit: 'piece'),
+        IngredientEntity(name: 'Tomato', quantity: '1', unit: 'piece'),
+      ],
+      nutrition: [
+        NutritionEntity(name: 'Calories', quantity: '300', unit: 'kcal'),
+        NutritionEntity(name: 'Protein', quantity: '20', unit: 'g'),
+        NutritionEntity(name: 'Carbohydrates', quantity: '30', unit: 'g'),
+        NutritionEntity(name: 'Fat', quantity: '10', unit: 'g'),
+      ],
+    )..servings = 2,
   ];
-
-  @override
-  Future<List<RecipeEntity>> getFavorites() async {
-    return _favorites.cast<RecipeEntity>();
-  }
-
-  @override
-  Future<void> removeFavoriteById(String recipeId) async {
-    _favorites.removeWhere((recipe) => recipe.id == recipeId);
-  }
 }

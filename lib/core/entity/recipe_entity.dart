@@ -8,12 +8,13 @@ class RecipeEntity {
   final int numberOfIngredients;
   final String cookingTime;
   final String category;
-  final bool isFavorite = false;
+  bool isFavorite = false;
   final String? description;
   final String? instructions;
   final List<String>? directions;
   final List<IngredientEntity>? ingredients;
   final List<NutritionEntity>? nutrition;
+  var servings;
 
   RecipeEntity({
     this.ingredients,
@@ -28,4 +29,33 @@ class RecipeEntity {
     required this.directions,
     required this.description,
   });
+
+  RecipeEntity copyWith({
+    String? id,
+    String? name,
+    String? image,
+    int? numberOfIngredients,
+    String? cookingTime,
+    String? category,
+    bool? isFavorite,
+    String? description,
+    String? instructions,
+    List<String>? directions,
+    List<IngredientEntity>? ingredients,
+    List<NutritionEntity>? nutrition,
+  }) {
+    return RecipeEntity(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      numberOfIngredients: numberOfIngredients ?? this.numberOfIngredients,
+      cookingTime: cookingTime ?? this.cookingTime,
+      category: category ?? this.category,
+      description: description ?? this.description,
+      instructions: instructions ?? this.instructions,
+      directions: directions ?? this.directions,
+      ingredients: ingredients ?? this.ingredients,
+      nutrition: nutrition ?? this.nutrition,
+    )..isFavorite = isFavorite ?? this.isFavorite;
+  }
 }
