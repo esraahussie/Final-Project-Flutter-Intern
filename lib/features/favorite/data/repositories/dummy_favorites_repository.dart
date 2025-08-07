@@ -1,5 +1,7 @@
 import 'package:recipe_app_withai/core/entity/recipe_entity.dart';
 import 'package:recipe_app_withai/features/favorite/domain/repository/favorites_repository.dart';
+import 'package:recipe_app_withai/features/recipe_details/domain/entities/ingredient_entity.dart';
+import 'package:recipe_app_withai/features/recipe_details/domain/entities/nutrition_entity.dart';
 
 class DummyFavoritesRepository implements FavoritesRepository {
   final List<RecipeEntity> _favorites = [
@@ -16,6 +18,19 @@ class DummyFavoritesRepository implements FavoritesRepository {
         'Cook spaghetti',
         'Prepare sauce',
         'Combine and serve',
+      ],
+      ingredients: [
+        IngredientEntity(name: 'Spaghetti', quantity: '200g', unit: 'grams'),
+        IngredientEntity(name: 'Ground beef', quantity: '200g', unit: 'grams'),
+        IngredientEntity(
+            name: 'Tomato sauce', quantity: '200ml', unit: 'milliliters'),
+        IngredientEntity(name: 'Onion', quantity: '1', unit: 'piece'),
+      ],
+      nutrition: [
+        NutritionEntity(name: 'Calories', quantity: '400', unit: 'kcal'),
+        NutritionEntity(name: 'Protein', quantity: '20', unit: 'g'),
+        NutritionEntity(name: 'Carbohydrates', quantity: '50', unit: 'g'),
+        NutritionEntity(name: 'Fat', quantity: '10', unit: 'g'),
       ],
     ),
     RecipeEntity(

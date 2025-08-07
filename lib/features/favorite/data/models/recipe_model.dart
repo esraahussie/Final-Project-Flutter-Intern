@@ -2,7 +2,9 @@ import 'package:recipe_app_withai/core/entity/recipe_entity.dart';
 
 class RecipeModel extends RecipeEntity {
   RecipeModel(
-      {super.description,
+      {super.ingredients,
+      super.nutrition,
+      super.description,
       super.instructions,
       super.directions,
       required super.id,

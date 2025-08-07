@@ -1,3 +1,6 @@
+import 'package:recipe_app_withai/features/recipe_details/domain/entities/ingredient_entity.dart';
+import 'package:recipe_app_withai/features/recipe_details/domain/entities/nutrition_entity.dart';
+
 class RecipeEntity {
   final String id;
   final String name;
@@ -9,10 +12,12 @@ class RecipeEntity {
   final String? description;
   final String? instructions;
   final List<String>? directions;
-  // TODO : add Ingredients entity
-  // TODO : add Nutritional information entity
+  final List<IngredientEntity>? ingredients;
+  final List<NutritionEntity>? nutrition;
 
   RecipeEntity({
+    this.ingredients,
+    this.nutrition,
     required this.id,
     required this.name,
     required this.image,
