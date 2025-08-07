@@ -1,8 +1,11 @@
-import 'package:recipe_app_withai/features/favorite/domain/entity/recipe_entity.dart';
+import 'package:recipe_app_withai/core/entity/recipe_entity.dart';
 
 class RecipeModel extends RecipeEntity {
   RecipeModel(
-      {required super.id,
+      {super.description,
+      super.instructions,
+      super.directions,
+      required super.id,
       required super.name,
       required super.image,
       required super.numberOfIngredients,

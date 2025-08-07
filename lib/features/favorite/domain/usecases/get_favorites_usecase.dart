@@ -1,4 +1,4 @@
-import 'package:recipe_app_withai/features/favorite/domain/entity/recipe_entity.dart';
+import 'package:recipe_app_withai/core/entity/recipe_entity.dart';
 import 'package:recipe_app_withai/features/favorite/domain/repository/favorites_repository.dart';
 
 class GetFavoritesUsecase {
