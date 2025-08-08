@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe_app_withai/core/app_pallet.dart';
 
 class DirectionsSection extends StatelessWidget {
   final List<String> directions;
@@ -14,7 +15,7 @@ class DirectionsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("Total Steps: ${directions.length}",
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 16.sp, color: AppPallet.textColor)),
           SizedBox(height: 12.h),
           ...List.generate(directions.length, (index) {
             return Padding(
@@ -24,11 +25,14 @@ class DirectionsSection extends StatelessWidget {
                 children: [
                   Text("Step ${index + 1}",
                       style: TextStyle(
-                          fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppPallet.textColor)),
                   SizedBox(height: 4.h),
                   Text(
                     directions[index],
-                    style: TextStyle(fontSize: 14.sp),
+                    style:
+                        TextStyle(fontSize: 16.sp, color: AppPallet.textColor),
                   ),
                 ],
               ),

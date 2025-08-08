@@ -9,7 +9,7 @@ class RecipeDetailsState {
   RecipeDetailsState({
     this.recipe,
     this.isLoading = false,
-    this.tabIndex = 0,
+    this.tabIndex = 2, // 0: Summary, 1: Ingredients, 2: Directions
     this.recipeId = '',
   });
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe_app_withai/core/app_pallet.dart';
 
 import '../bloc/recipe_details_bloc.dart';
 import '../bloc/recipe_details_event.dart';
@@ -42,7 +43,6 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
             if (state.recipe == null) {
               return Center(child: Text("No recipe found"));
             }
-
             final recipe = state.recipe!;
             final tabIndex = state.tabIndex;
 
@@ -58,7 +58,11 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                       // Back button
                       GestureDetector(
                         onTap: () => Navigator.of(context).pop(),
-                        child: const Icon(Icons.arrow_back),
+                        child: const Icon(
+                          Icons.arrow_back_ios_new,
+                          size: 32,
+                          color: AppPallet.textColor,
+                        ),
                       ),
                       // Favorite button
                       GestureDetector(
@@ -71,7 +75,8 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                           recipe.isFavorite
                               ? Icons.favorite
                               : Icons.favorite_border,
-                          color: Colors.red,
+                          color: AppPallet.textColor,
+                          size: 32,
                         ),
                       )
                     ],
@@ -80,11 +85,10 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
 
                 // Image
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(16.r),
                   child: Image.network(
                     recipe.image,
                     width: double.infinity,
-                    height: 180.h,
+                    height: 235.h,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -93,23 +97,18 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                 Padding(
                   padding: EdgeInsets.all(16.w),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(recipe.name,
                           style: TextStyle(
-                              fontSize: 20.sp, fontWeight: FontWeight.bold)),
+                              fontSize: 28.sp, fontWeight: FontWeight.bold)),
                       SizedBox(height: 8.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Category: ${recipe.category}",
-                              style: TextStyle(fontSize: 14.sp)),
-                          Text("Time: ${recipe.cookingTime} min",
-                              style: TextStyle(fontSize: 14.sp)),
-                          Text("Servings: ${recipe.servings}",
-                              style: TextStyle(fontSize: 14.sp)),
-                        ],
-                      ),
+                      Text(
+                          "${recipe.category}.${recipe.cookingTime}.${recipe.servings} servings",
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: AppPallet.grayColor,
+                          )),
                     ],
                   ),
                 ),
@@ -127,16 +126,18 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                   ),
                 ),
 
-                Divider(thickness: 1, height: 20.h),
-
                 // Section Content
                 Expanded(
-                  child: IndexedStack(
-                    index: tabIndex,
+                  child: Column(
                     children: [
-                      SummarySection(recipe: recipe),
-                      IngredientsSection(ingredients: recipe.ingredients!),
-                      DirectionsSection(directions: recipe.directions!),
+                      IndexedStack(
+                        index: tabIndex,
+                        children: [
+                          SummarySection(recipe: recipe),
+                          IngredientsSection(ingredients: recipe.ingredients!),
+                          DirectionsSection(directions: recipe.directions!),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -160,16 +161,15 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
           Text(
             title,
             style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: isSelected ? Colors.black : Colors.grey,
+              fontSize: 20.sp,
+              color: isSelected ? AppPallet.textColor : AppPallet.grayColor,
             ),
           ),
           SizedBox(height: 4.h),
           Container(
-            height: 2.h,
-            width: 40.w,
-            color: isSelected ? Colors.black : Colors.transparent,
+            height: 5.h,
+            width: 30.w,
+            color: isSelected ? AppPallet.textColor : Colors.transparent,
           )
         ],
       ),
