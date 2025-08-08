@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app_withai/core/app_pallet.dart';
+import 'package:recipe_app_withai/core/theme/app_pallet.dart';
 import 'package:recipe_app_withai/features/favorite/presentation/pages/favorite_page.dart';
 import 'package:recipe_app_withai/features/home/presentation/pages/home_page.dart';
 import 'package:recipe_app_withai/features/profile/presentation/pages/profile_page.dart';
 import 'package:recipe_app_withai/translation/icon_nav_bar.dart';
 
-class Transition extends StatefulWidget {
+class TransitionPage extends StatefulWidget {
   static const routeName = "Transition";
 
-  const Transition({super.key});
+  const TransitionPage({super.key});
 
   @override
-  State<Transition> createState() => _TransitionState();
+  State<TransitionPage> createState() => _TransitionPageState();
 }
 
-class _TransitionState extends State<Transition> {
+class _TransitionPageState extends State<TransitionPage> {
   int selectedIndex = 0;
 
   final List<Widget> _pages = [
