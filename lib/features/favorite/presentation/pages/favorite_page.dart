@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app_withai/core/widgets/recipe_card.dart';
-import 'package:recipe_app_withai/features/favorite/data/repositories/dummy_favorites_repository.dart';
+import 'package:recipe_app_withai/features/favorite/data/repositories/favorites_repository.dart';
 import 'package:recipe_app_withai/features/favorite/domain/usecases/get_favorites_usecase.dart';
 import 'package:recipe_app_withai/features/favorite/domain/usecases/remove_favorite_byid.dart';
 import 'package:recipe_app_withai/features/favorite/presentation/bloc/favorites_bloc.dart';
+import 'package:recipe_app_withai/features/recipe_details/presentation/pages/recipe_details_page.dart';
 
 class FavoritePage extends StatelessWidget {
   static const routeName = "FavoritePage";
@@ -14,8 +15,8 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => FavoritesBloc(
-          GetFavoritesUsecase(DummyFavoritesRepository()),
-          RemoveFavoriteById(DummyFavoritesRepository()))
+          GetFavoritesUsecase(FavoritesRepositoryImpl()),
+          RemoveFavoriteById(FavoritesRepositoryImpl()))
         ..add(GetFavoritesEvent()),
       child: Scaffold(
         appBar: AppBar(
@@ -51,6 +52,13 @@ class FavoritePage extends StatelessWidget {
                         ),
                       );
                       context.read<FavoritesBloc>().add(GetFavoritesEvent());
+                    },
+                    onCardTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        RecipeDetailsPage.routeName,
+                        arguments: recipe.id,
+                      );
                     },
                   );
                 },
