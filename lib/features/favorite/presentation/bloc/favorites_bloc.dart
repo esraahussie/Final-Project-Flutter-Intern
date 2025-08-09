@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:recipe_app_withai/core/theme/app_pallet.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app_withai/core/entity/recipe_entity.dart';
 import 'package:recipe_app_withai/features/favorite/domain/usecases/get_favorites_usecase.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:recipe_app_withai/core/app_pallet.dart';
+import 'package:recipe_app_withai/core/theme/app_pallet.dart';
 
 class DirectionsSection extends StatelessWidget {
   final List<String> directions;

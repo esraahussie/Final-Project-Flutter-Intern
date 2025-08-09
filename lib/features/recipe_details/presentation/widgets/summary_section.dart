@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:recipe_app_withai/core/app_pallet.dart';
+import 'package:recipe_app_withai/core/theme/app_pallet.dart';
 import 'package:recipe_app_withai/core/entity/recipe_entity.dart';
 
 class SummarySection extends StatelessWidget {

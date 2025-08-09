@@ -1,5 +1,6 @@
-import '../domain/recipe_entity.dart';
-import '../domain/recipe_repository.dart';
+import 'package:recipe_app_withai/features/home/domian/recipe_repository.dart';
+
+import 'package:recipe_app_withai/features/home/domian/recipe_entity.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final List<RecipeEntity> _recipes = [];
