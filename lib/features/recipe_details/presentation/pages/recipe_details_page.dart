@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:recipe_app_withai/core/app_pallet.dart';
+import 'package:recipe_app_withai/core/theme/app_pallet.dart';
 
 import '../bloc/recipe_details_bloc.dart';
 import '../bloc/recipe_details_event.dart';

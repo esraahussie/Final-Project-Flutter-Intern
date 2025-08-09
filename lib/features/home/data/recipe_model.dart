@@ -1,4 +1,4 @@
-import '../domain/recipe_entity.dart';
+import 'package:recipe_app_withai/features/home/domian/recipe_entity.dart';
 
 class RecipeModel extends RecipeEntity {
   RecipeModel({

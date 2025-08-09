@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../../domain/recipe_entity.dart';
+import 'package:recipe_app_withai/features/home/domian/recipe_entity.dart';
+
 
 class RecipeCard extends StatelessWidget {
   final RecipeEntity recipe;
