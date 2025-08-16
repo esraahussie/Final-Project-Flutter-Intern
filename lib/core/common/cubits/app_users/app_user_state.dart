@@ -8,4 +8,6 @@ final class AppUserInitial extends AppUserState {}
 final class AppUserLoggedIn extends AppUserState {
   final MyUser user;
   AppUserLoggedIn(this.user);
+
+
 }
