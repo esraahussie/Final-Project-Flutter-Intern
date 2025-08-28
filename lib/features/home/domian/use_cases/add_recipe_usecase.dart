@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:fpdart/src/either.dart';
 import 'package:recipe_app_withai/core/errors/failure.dart';
 import 'package:recipe_app_withai/core/usecase/usecase.dart';
+import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
 
 import '../entities/recipe_entity.dart';
 import '../repositories/recipe_repository.dart';
@@ -31,21 +32,22 @@ class UploadRecipeParams {
   final String title;
   final String category;
   final String description;
-  final List<String> ingredients;
+  final List<Ingredient> ingredients;
   final int durationMinutes;
   final File image;
   final bool isFavorite;
   // final DateTime updatedAt;
 
-  UploadRecipeParams(
-      this.posterId,
-      this.title,
-      this.category,
-      this.description,
-      this.ingredients,
-      this.durationMinutes,
-      this.image,
-      this.isFavorite,
+  UploadRecipeParams({
+    required this.posterId,
+    required this.title,
+    required this.category,
+    required this.description,
+    required this.ingredients,
+    required this.durationMinutes,
+    required this.image,
+    required this.isFavorite,
+  }
       // this.updatedAt
       );
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app_withai/core/theme/app_pallet.dart';
-import 'package:recipe_app_withai/features/home/presentation/pages/ingerent.dart';
-import 'add_recipe_page.dart';
+import 'package:recipe_app_withai/features/home/presentation/pages/app_recipe_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "/home";
@@ -45,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddRecipeForm(),
+                      builder: (context) => const AddRecipePage(),
                     ),
                   );
                 },
