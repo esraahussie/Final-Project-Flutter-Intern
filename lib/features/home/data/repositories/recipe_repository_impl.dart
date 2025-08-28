@@ -1,9 +1,9 @@
 import 'dart:io';
-
 import 'package:fpdart/src/either.dart';
 import 'package:recipe_app_withai/core/errors/failure.dart';
 import 'package:recipe_app_withai/features/home/data/data_sources/meal_remote_data_source.dart';
 import 'package:recipe_app_withai/features/home/data/models/recipe_model.dart';
+import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
 import 'package:recipe_app_withai/features/home/domian/repositories/recipe_repository.dart';
 
 import 'package:recipe_app_withai/features/home/domian/entities/recipe_entity.dart';
@@ -48,12 +48,14 @@ class RecipeRepositoryImpl implements RecipeRepository {
     required String title,
     required String category,
     required String description,
-    required List<String> ingredients,
+    required List<Ingredient> ingredients,
     required int durationMinutes,
     required File image,
     required bool isFavorite,
     required String posterId
   }) async {
+    print('🏪 Repository: بدء رفع الوصفة - $title');
+
     try{
       RecipeModel recipeModel= RecipeModel(
           id: const Uuid().v1(),
@@ -66,12 +68,37 @@ class RecipeRepositoryImpl implements RecipeRepository {
           posterId: posterId,
           title: title,
           updatedAt: DateTime.now());
-       final imageUrl = await recipeRemoteDataSource.uploadMealImage(image: image, recipe: recipeModel);
-      recipeModel = recipeModel.copyWith(imagePath:imageUrl );
+      print('📸 رفع صورة الوصفة الرئيسية...');
+      final imageUrl = await recipeRemoteDataSource.uploadMealImage(image: image, recipe: recipeModel);
+      print('✅ صورة الوصفة رفعت إلى: $imageUrl');
+
+      final ingredientImageUrls = await recipeRemoteDataSource.uploadIngredientImages(
+        ingredients: ingredients,
+        recipeId: recipeModel.id,
+      );
+      List<Ingredient> updatedIngredients = [];
+      for (int i = 0; i < ingredients.length; i++) {
+        updatedIngredients.add(
+            Ingredient(
+              name: ingredients[i].name,
+              imagePath: ingredientImageUrls[i],
+            )
+        );
+      }
+
+      print('📦 رفع بيانات الوصفة إلى Supabase...');
+
+      recipeModel = recipeModel.copyWith(imagePath:imageUrl,ingredients: updatedIngredients );
       final uploadedRecipe = await recipeRemoteDataSource.uploadMeal(recipeModel);
+      print('🎉 تم رفع الوصفة بنجاح: ${uploadedRecipe.title}');
+
       return right(uploadedRecipe);
+
     }
     on ServerFailure catch(e){
+      print('❌ فشل في الرفع: ${e.message}');
+      print('❌ خطأ غير متوقع: $e');
+
       return left(Failure(e.message));
     }
 

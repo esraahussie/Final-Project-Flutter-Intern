@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fpdart/fpdart.dart';
 import 'package:recipe_app_withai/core/errors/failure.dart';
+import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
 
 import '../entities/recipe_entity.dart';
 
@@ -10,7 +11,7 @@ abstract interface class RecipeRepository {
     required String title,
     required String category,
     required String description,
-    required List<String> ingredients,
+    required List<Ingredient> ingredients,
     required int durationMinutes,
     required File image,
     required bool isFavorite,

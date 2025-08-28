@@ -1,3 +1,4 @@
+import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
 import 'package:recipe_app_withai/features/home/domian/entities/recipe_entity.dart';
 
 class RecipeModel extends RecipeEntity {
@@ -16,6 +17,10 @@ class RecipeModel extends RecipeEntity {
 
 
   Map<String,dynamic> toJson(){
+    final ingredientsJson = ingredients.map((ingredient) => {
+      'name': ingredient.name,
+      'image_url': ingredient.imagePath,
+    }).toList();
     return <String,dynamic>{
       'id':id,
       'updated_at':updatedAt.toIso8601String(),
@@ -26,21 +31,40 @@ class RecipeModel extends RecipeEntity {
       'description':description,
       'main_image_url':imagePath,
       'duration':durationMinutes,
-      'ingredientes':ingredients
+      'ingredientes':ingredientsJson
     };
   }
 
-  factory RecipeModel.fromJson(Map<String,dynamic> map){
+  factory RecipeModel.fromJson(Map<String, dynamic> map) {
+    List<Ingredient> ingredientsList = [];
+
+    if (map['ingredientes'] != null && map['ingredientes'] is List) {
+      final ingredientsData = map['ingredientes'] as List;
+
+      ingredientsList = ingredientsData.map((item) {
+        if (item is Map<String, dynamic>) {
+          return Ingredient(
+            name: item['name']?.toString() ?? '',
+            imagePath: item['image_url']?.toString(),
+          );
+        } else if (item is String) {
+          // للتوافق مع الإصدارات القديمة التي كانت تخزن المكونات كنصوص فقط
+          return Ingredient(name: item);
+        } else {
+          return Ingredient(name: '');
+        }
+      }).toList();
+    }
     return RecipeModel(
         id:map['id']as String,
         posterId:map['poster_id']as String,
         title:map['title']as String,
         imagePath:map['main_image_url']as String,
-        durationMinutes:map['description']as int,
+        durationMinutes:(map['duration'] ?? 0) as int,
         category:map['category']as String,
         isFavorite:map['is_favorite']as bool,
         updatedAt:map['updated_at']==null?DateTime.now():DateTime.parse(map['updated_at']),
-        ingredients:List<String>.from(map['ingredientes'] ?? []),
+        ingredients:ingredientsList,
         description:map['description']
     );
   }
@@ -50,9 +74,8 @@ class RecipeModel extends RecipeEntity {
     String? posterId,
     String? title,
     String? category,
-    // final int ingredientsCount;
     String? description,
-    List<String>? ingredients,
+    List<Ingredient>? ingredients,
     int? durationMinutes,
     String? imagePath,
     bool? isFavorite,
@@ -72,4 +95,3 @@ class RecipeModel extends RecipeEntity {
     );
   }
 }
-

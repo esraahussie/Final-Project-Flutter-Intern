@@ -7,21 +7,20 @@ final class RecipeUpload extends RecipeEvent{
   final String title;
   final String category;
   final String description;
-  final List<String> ingredients;
+  final  List<Ingredient> ingredients;
   final int durationMinutes;
   final File image;
   final bool isFavorite;
   // final DateTime updatedAt;
 
-  RecipeUpload(
-      this.posterId,
-      this.title,
-      this.category,
-      this.description,
-      this.ingredients,
-      this.durationMinutes,
-      this.image,
-      this.isFavorite,
-      // this.updatedAt
-      );
+  RecipeUpload({
+    required this.posterId,
+    required this.title,
+    required this.category,
+    required this.description,
+    required this.ingredients,
+    required this.durationMinutes,
+    required this.image,
+    required this.isFavorite,
+  });
 }

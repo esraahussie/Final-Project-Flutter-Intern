@@ -1,3 +1,5 @@
+import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
+
 class RecipeEntity {
   final String id;
   final String posterId;
@@ -5,7 +7,7 @@ class RecipeEntity {
   final String category;
   // final int ingredientsCount;
   final String description;
-  final List<String> ingredients;
+  final List<Ingredient> ingredients;
   final int durationMinutes;
   final String imagePath;
   final bool isFavorite;
