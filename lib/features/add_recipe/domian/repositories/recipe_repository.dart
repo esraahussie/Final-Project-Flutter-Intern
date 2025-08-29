@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:fpdart/fpdart.dart';
 import 'package:recipe_app_withai/core/errors/failure.dart';
-import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
-
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
 import '../entities/recipe_entity.dart';
 
 abstract interface class RecipeRepository {

@@ -70,7 +70,7 @@ class _TransitionPageState extends State<TransitionPage> {
             BottomNavigationBarItem(
               icon: IconNavBar(
                 selectedIndex: selectedIndex,
-                image: "assets/icons/home.png",
+                image: "assets/icons/add_recipe.png",
                 index: 0,
               ),
               label: '',

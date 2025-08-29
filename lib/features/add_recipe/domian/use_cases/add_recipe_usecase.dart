@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:fpdart/src/either.dart';
 import 'package:recipe_app_withai/core/errors/failure.dart';
 import 'package:recipe_app_withai/core/usecase/usecase.dart';
-import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
-
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
 import '../entities/recipe_entity.dart';
 import '../repositories/recipe_repository.dart';
 class UploadRecipe implements UseCase<RecipeEntity, UploadRecipeParams> {

@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:recipe_app_withai/core/common/cubits/app_users/app_user_cubit.dart';
 import 'package:recipe_app_withai/core/theme/app_pallet.dart';
-import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
-import 'package:recipe_app_withai/features/home/presentation/manager/recipe_bloc.dart';
-import 'package:recipe_app_withai/features/home/presentation/widgets/add_recipe_form.dart';
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
+import 'package:recipe_app_withai/features/add_recipe/presentation/manager/recipe_bloc.dart';
+import 'package:recipe_app_withai/features/add_recipe/presentation/widgets/add_recipe_form.dart';
+
 
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({super.key});

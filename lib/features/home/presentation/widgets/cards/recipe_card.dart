@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:recipe_app_withai/features/home/domian/entities/recipe_entity.dart';
+import 'package:recipe_app_withai/features/home/data/models/recipe_model.dart';
 
 
 class RecipeCard extends StatelessWidget {
-  final RecipeEntity recipe;
+  final RecipeModel recipe;
   final VoidCallback? onFavoriteToggle;
 
   const RecipeCard({

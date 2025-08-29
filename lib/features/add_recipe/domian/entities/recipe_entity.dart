@@ -1,4 +1,4 @@
-import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
 
 class RecipeEntity {
   final String id;
