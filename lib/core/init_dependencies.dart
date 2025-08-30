@@ -16,6 +16,11 @@ import 'package:recipe_app_withai/features/auth/domain/use_cases/google_sign_in.
 import 'package:recipe_app_withai/features/auth/domain/use_cases/user_sign_in.dart';
 import 'package:recipe_app_withai/features/auth/domain/use_cases/user_sign_up.dart';
 import 'package:recipe_app_withai/features/auth/presentation/manager/auth_bloc.dart';
+import 'package:recipe_app_withai/features/home/data/data_source/home_remote_data_source.dart';
+import 'package:recipe_app_withai/features/home/data/repositories/home_repositoryImpl.dart';
+import 'package:recipe_app_withai/features/home/domain/repositories/home_repository.dart';
+import 'package:recipe_app_withai/features/home/domain/use_cases/get_all_recipes.dart';
+import 'package:recipe_app_withai/features/home/presentation/manager/home_bloc.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -51,6 +56,7 @@ Future<void> initDependencies() async {
   // Initialize Auth dependencies
   initAuth();
   _initRecipe();
+  _initHome();
 }
 
 void initAuth() {
@@ -109,3 +115,36 @@ void _initRecipe() {
       ),
     );
 }
+
+void _initHome() {
+  // Data sources
+  serviceLocator
+    ..registerFactory<HomeRemoteDataSource>(
+        () => HomeRemoteDataSourceImpl(
+      supabaseClient: serviceLocator(),
+    ),
+  )
+
+  // Repositories
+  ..registerFactory<HomeRepository>(
+        () => HomeRepositoryImpl(
+      remoteDataSource: serviceLocator(),
+    ),
+  )
+
+  // Use cases
+  ..registerFactory(
+        () => GetAllRecipes(
+      serviceLocator(),
+    ),
+  )
+
+  // Bloc - Use Factory if you want a new instance per widget
+  // Use LazySingleton if you want a single instance across the app
+  ..registerLazySingleton(
+        () => HomeBloc(
+      getAllRecipes: serviceLocator(),
+    ),
+  );
+}
+

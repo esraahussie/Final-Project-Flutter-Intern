@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe_app_withai/core/theme/app_pallet.dart';
 import 'package:recipe_app_withai/features/add_recipe/presentation/pages/app_recipe_page.dart';
-import 'package:recipe_app_withai/features/home/data/models/recipe_model.dart';
+import 'package:recipe_app_withai/features/home/domain/entities/recipe_entity.dart';
 import 'package:recipe_app_withai/features/home/presentation/manager/home_bloc.dart';
 import 'package:recipe_app_withai/features/home/presentation/widgets/cards/recipe_card.dart';
 
 class HomePage extends StatefulWidget {
-  static const routeName = "/home";
-
+  static const String routeName = "HomePage";
   const HomePage({super.key});
 
   @override
@@ -15,164 +16,132 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController _searchController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
-    context.read<HomeBloc>().add(LoadSuggestionsEvent());
+    // Load recipes when the page initializes
+    context.read<HomeBloc>().add(LoadAllRecipesEvent());
   }
-
-  void _openRecipeDetails(RecipeModel
-  recipe) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(title: Text(recipe.title)),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListView(
-              children: [
-                if (recipe.imagePath != null)
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      recipe.imagePath!,
-                      fit: BoxFit.cover,
-                      height: 200,
-                      width: double.infinity,
-                    ),
-                  ),
-                const SizedBox(height: 16),
-                Text(recipe.title,
-                    style: const TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold)),
-                Text("${recipe.category} • ${recipe.durationMinutes} min"),
-                const SizedBox(height: 12),
-                Text("Ingredients (${recipe.ingredients.length}):",
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                ...recipe.ingredients.map((ing) => Text("• $ing")).toList(),
-                const SizedBox(height: 12),
-                Text("Description:",
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                Text(recipe.description),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddRecipePage(),
-            ),
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: _searchController,
-              decoration: const InputDecoration(
-                labelText: "Search recipes...",
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (value) {
-                if (value.isEmpty) {
-                  context.read<HomeBloc>().add(LoadSuggestionsEvent());
-                } else {
-                  context.read<HomeBloc>().add(SearchRecipesEvent(value));
-                }
-              },
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          // Search Bar with Add Button
+          Container(
+            // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            color: Colors.white,
+            child: Row(
               children: [
-                const Text("Suggestions",
-                    style:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                TextButton(
-                  onPressed: () {
-                    context.read<HomeBloc>().add(LoadAllRecipesEvent());
-                  },
-                  child: const Text("See All"),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Search recipes...",
+                        prefixIcon: const Icon(Icons.search, size: 20),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
+                const SizedBox(width: 8),
+                // Container(
+                //   width: 40,
+                //   height: 40,
+                //   decoration: BoxDecoration(
+                //     color: AppPallet.mainColor,
+                //     shape: BoxShape.circle,
+                //   ),
+                //   child:
+                IconButton(
+                    onPressed: () {
+
+                    },
+                    icon:  Image.asset("assets/icons/gemini.png",width: 40.w,height: 40.h,),
+                    padding: EdgeInsets.zero,
+                  ),
+                // ),
               ],
             ),
-            const SizedBox(height: 8),
-            Expanded(
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  context.read<HomeBloc>().add(LoadSuggestionsEvent());
-                },
-                child: BlocBuilder<HomeBloc, HomeState>(
-                  builder: (context, state) {
-                    if (state is HomeLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else                   if (state is HomeLoaded) {
-                      if (state.recipes.isEmpty) {
-                        return const Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.restaurant, size: 64, color: Colors.grey),
-                              SizedBox(height: 16),
-                              Text(
-                                "No recipes found.",
-                                style: TextStyle(fontSize: 18, color: Colors.grey),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                "Tap the + button to add your first recipe!",
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ],
-                          ),
-                        );
+
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                width: 200.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25), // Rounded corners
+                    color: AppPallet.mainColor,
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const AddRecipePage()),
+                    ).then((value) {
+                      // This runs when you return from AddRecipePage
+                      if (value == true) { // Return true if recipe was added
+                        context.read<HomeBloc>().add(LoadAllRecipesEvent());
                       }
-                      return ListView.builder(
-                        itemCount: state.recipes.length,
-                        itemBuilder: (context, index) {
-                          final recipe = state.recipes[index];
-                          return GestureDetector(
-                            onTap: () => _openRecipeDetails(recipe),
-                            child: RecipeCard(
-                              recipe: recipe,
-                              onFavoriteToggle: () {
-                                context
-                                    .read<HomeBloc>()
-                                    .add(ToggleFavoriteEvent(recipe.title));
-                              },
-                            ),
-                          );
-                        },
-                      );
-                    } else if (state is HomeError) {
-                      return Center(child: Text(state.message));
-                    }
-                    return const Center(
-                        child: Text("Search results will appear here..."));
+                    });
                   },
+                  child: Text("add your ingrediantes",style: TextStyle(color: AppPallet.whiteColor),),
                 ),
               ),
+            ],
+          ),
+
+          // Recipes List
+          Expanded(
+            child: BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                if (state is HomeLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is HomeLoaded) {
+                  // Add null safety check for recipes list
+                  final recipes = state.recipes ?? [];
+
+                  if (recipes.isEmpty) {
+                    return const Center(child: Text("No recipes available"));
+                  }
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(16),
+                    itemCount: recipes.length,
+                    itemBuilder: (context, index) {
+                      final recipe = recipes[index];
+                      if (recipe == null) return const SizedBox.shrink();
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: RecipeCard(recipe: recipe),
+                      );
+                    },
+                  );
+                } else if (state is HomeError) {
+                  return Center(child: Text(state.message ?? "An error occurred"));
+                }
+                return const Center(child: Text("Loading..."));
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

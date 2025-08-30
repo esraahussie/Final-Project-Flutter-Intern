@@ -1,12 +1,9 @@
-
-
 import 'dart:io';
 
 import 'package:recipe_app_withai/core/errors/failure.dart';
 import 'package:recipe_app_withai/features/add_recipe/data/models/recipe_model.dart';
 import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 abstract interface class RecipeRemoteDataSource{
   Future<RecipeModel> uploadMeal(RecipeModel recipe);
   Future<String> uploadMealImage(

@@ -11,14 +11,14 @@ class HomeInitial extends HomeState {}
 
 class HomeLoading extends HomeState {}
 
-class HomeLoaded extends HomeState {
-  final List<RecipeModel> recipes;
-
-  HomeLoaded(this.recipes);
-
-  @override
-  List<Object?> get props => [recipes];
-}
+// class HomeLoaded extends HomeState {
+//   final List<RecipeModel> recipes;
+//
+//   HomeLoaded(this.recipes);
+//
+//   @override
+//   List<Object?> get props => [recipes];
+// }
 
 class HomeError extends HomeState {
   final String message;

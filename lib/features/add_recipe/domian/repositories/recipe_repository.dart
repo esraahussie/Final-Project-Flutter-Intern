@@ -15,9 +15,9 @@ abstract interface class RecipeRepository {
     required bool isFavorite,
     required String posterId
 });
-  List<RecipeEntity> getAllRecipes();
-  void addRecipe(RecipeEntity recipe);
-  // void toggleFavorite(RecipeEntity recipe);
-  List<RecipeEntity> getFavoriteRecipes();
+  // List<RecipeEntity> getAllRecipes();
+  // void addRecipe(RecipeEntity recipe);
+  // // void toggleFavorite(RecipeEntity recipe);
+  // List<RecipeEntity> getFavoriteRecipes();
 }
 

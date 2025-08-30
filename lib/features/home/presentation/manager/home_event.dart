@@ -6,6 +6,14 @@ abstract class HomeEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+class HomeLoaded extends HomeState {
+  final List<RecipeEntity> recipes;
+
+   HomeLoaded(this.recipes);
+
+  @override
+  List<Object> get props => [recipes];
+}
 
 class LoadSuggestionsEvent extends HomeEvent {}
 
