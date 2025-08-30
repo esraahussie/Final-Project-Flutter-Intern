@@ -5,11 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:recipe_app_withai/core/common/cubits/app_users/app_user_cubit.dart';
 import 'package:recipe_app_withai/core/theme/app_pallet.dart';
-import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
-import 'package:recipe_app_withai/features/home/presentation/manager/recipe_bloc.dart';
-import 'package:recipe_app_withai/features/home/presentation/widgets/add_recipe_form.dart';
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
+import 'package:recipe_app_withai/features/add_recipe/presentation/manager/recipe_bloc.dart';
+import 'package:recipe_app_withai/features/add_recipe/presentation/widgets/add_recipe_form.dart';
+import 'package:recipe_app_withai/translation/icon_nav_bar.dart';
+
 
 class AddRecipePage extends StatefulWidget {
+  static const String routeName="AddRecipePage";
   const AddRecipePage({super.key});
 
   @override
@@ -78,7 +81,20 @@ class _AddRecipePageState extends State<AddRecipePage> {
       if (appUserState is AppUserLoggedIn) {
         final posterId = appUserState.user.id;
         print('👤 Poster ID: $posterId');
-
+        showDialog(
+          context: context,
+          barrierDismissible: false, // Prevent closing by tapping outside
+          builder: (context) => const AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('Uploading recipe...'),
+              ],
+            ),
+          ),
+        );
         print('🚀 Sending RecipeUpload event...');
         context.read<RecipeBloc>().add(RecipeUpload(
           posterId: posterId,
@@ -91,7 +107,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
           isFavorite: false,
         ));
 
-        Navigator.pop(context);
+        // Navigator.pop(context);
       } else {
         print('❌ User not logged in properly');
         ScaffoldMessenger.of(context).showSnackBar(
@@ -115,7 +131,30 @@ class _AddRecipePageState extends State<AddRecipePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<RecipeBloc, RecipeState>(
+      listener: (context, state) {
+        if (state is RecipeSuccess) {
+          // Close the loading dialog
+          Navigator.pop(context);
+
+          // Show success message
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Recipe uploaded successfully!')),
+          );
+
+          // Navigate back to home
+          Navigator.pop(context, true); // Return true to indicate success
+        } else if (state is RecipeFailure) {
+          // Close the loading dialog
+          Navigator.pop(context);
+
+          // Show error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Upload failed: ${state.error}')),
+          );
+        }
+  },
+  child: Scaffold(
       appBar: AppBar(
         title: const Text("Add New Recipe"),
         backgroundColor: AppPallet.whiteColor,
@@ -339,6 +378,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
           ),
         ),
       ),
-    );
+    ),
+);
   }
 }

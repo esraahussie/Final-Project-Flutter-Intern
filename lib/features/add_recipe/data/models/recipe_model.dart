@@ -1,5 +1,7 @@
-import 'package:recipe_app_withai/features/home/domain/entities/ingredient.dart';
-import 'package:recipe_app_withai/features/home/domain/entities/recipe_entity.dart';
+
+
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/recipe_entity.dart';
 
 class RecipeModel extends RecipeEntity {
   RecipeModel({
@@ -56,18 +58,16 @@ class RecipeModel extends RecipeEntity {
       }).toList();
     }
     return RecipeModel(
-      id: map['id']?.toString() ?? '', // Null-safe with default
-      posterId: map['poster_id']?.toString() ?? '', // Null-safe with default
-      title: map['title']?.toString() ?? '', // Null-safe with default
-      imagePath: map['main_image_url']?.toString()??'', // Null-safe (can be null)
-      durationMinutes: (map['duration'] ?? 0) as int, // Already safe
-      category: map['category']?.toString() ?? '', // Null-safe with default
-      isFavorite: (map['is_favorite'] ?? false) as bool, // Safe with default
-      updatedAt: map['updated_at'] == null
-          ? DateTime.now()
-          : DateTime.parse(map['updated_at'].toString()), // Safe parsing
-      ingredients: ingredientsList,
-      description: map['description']?.toString()??'', // Null-safe (can be null)
+        id:map['id']as String,
+        posterId:map['poster_id']as String,
+        title:map['title']as String,
+        imagePath:map['main_image_url']as String,
+        durationMinutes:(map['duration'] ?? 0) as int,
+        category:map['category']as String,
+        isFavorite:map['is_favorite']as bool,
+        updatedAt:map['updated_at']==null?DateTime.now():DateTime.parse(map['updated_at']),
+        ingredients:ingredientsList,
+        description:map['description']
     );
   }
 

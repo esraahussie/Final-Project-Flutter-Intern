@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:fpdart/fpdart.dart';
 import 'package:recipe_app_withai/core/errors/failure.dart';
-import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
-
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
 import '../entities/recipe_entity.dart';
 
 abstract interface class RecipeRepository {
@@ -17,9 +15,9 @@ abstract interface class RecipeRepository {
     required bool isFavorite,
     required String posterId
 });
-  List<RecipeEntity> getAllRecipes();
-  void addRecipe(RecipeEntity recipe);
-  // void toggleFavorite(RecipeEntity recipe);
-  List<RecipeEntity> getFavoriteRecipes();
+  // List<RecipeEntity> getAllRecipes();
+  // void addRecipe(RecipeEntity recipe);
+  // // void toggleFavorite(RecipeEntity recipe);
+  // List<RecipeEntity> getFavoriteRecipes();
 }
 

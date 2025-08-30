@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:recipe_app_withai/features/home/domian/entities/ingredient.dart';
-import 'package:recipe_app_withai/features/home/domian/use_cases/add_recipe_usecase.dart';
-
+import 'package:recipe_app_withai/features/add_recipe/domian/entities/ingredient.dart';
+import 'package:recipe_app_withai/features/add_recipe/domian/use_cases/add_recipe_usecase.dart';
 part 'recipe_event.dart';
 part 'recipe_state.dart';
 
